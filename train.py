@@ -15,4 +15,19 @@ transform = transforms.Compose([
 ])
 
 #3. Load dataset
+train_dataset = datasets.ImageFolder(root="data/train",transform=transform)
+val_dataset =datasets.ImageFolder(root="data/val", transform=transform)
+
+train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
+ 
+print("Clasess: ", train_dataset.classes)
+
+#4. Define model
+model = nn.Sequential(
+  nn.Flatten(),
+  nn.Linear(128 * 128 * 3, 128),
+  nn.ReLU(),
+  nn.Linear(128,2)
+  ).to(device)
 
